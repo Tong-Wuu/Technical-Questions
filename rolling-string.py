@@ -6,13 +6,13 @@
 # roll once where the substring is the range of "ab"
 
 
-def roll(s, roll):
+def solution_1_roll(s, roll):
     result = ""
     sumOfEachRoll = [0] * len(s)
     a_to_z = [chr(i) for i in range(97, 123)]
 
     for eachRoll in roll:
-        for i in range(len(sumOfEachRoll)):
+        for i in range(eachRoll):
             sumOfEachRoll[i] += 1
 
     for char in range(len(s)):
@@ -22,4 +22,18 @@ def roll(s, roll):
     return result
 
 
-print(roll("abc", [3]))
+def solution_2_roll(s, roll):
+    ordChar = [ord(char) for char in s]
+
+    for eachRoll in roll:
+        for char in range(0, eachRoll):
+            if ordChar[char] == 122:
+                ordChar[char] = 97
+            else:
+                ordChar[char] += 1
+
+    return ''.join(chr(char) for char in ordChar)
+
+
+print(solution_1_roll("abc", [3, 3, 3, 3, 3, 2]))
+print(solution_2_roll("abc", [3, 3, 3, 3, 3, 2]))
