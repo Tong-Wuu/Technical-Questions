@@ -63,3 +63,20 @@ def solution_3_roll(s, roll):
     check = map(check_position, rolled)  # check and turn back the char
 
     return ''.join(check)  # join the characters
+
+
+def solution_4_roll(s, roll):
+    import collections
+    counter = collections.Counter(roll)
+    sumCounter = sum(counter.values())
+    ordChar = [ord(char) for char in s]
+
+    for i in range(len(ordChar)):
+        cur_roll = sumCounter - counter.get(i, 0)
+        ordChar[i] += cur_roll
+
+    return ''.join(chr(char) for char in ordChar)
+
+
+print(solution_4_roll("abc", [3, 3, 2, 3, 3, 3]))
+print(solution_2_roll("abc", [3, 3, 2, 3, 3, 3]))
